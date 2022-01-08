@@ -1,0 +1,16 @@
+﻿{
+    "compilers": {
+        "less": {
+            "relativeUrls": false,
+            "rootPath": "./",
+            "cssComb": "csscomb"
+        }
+    },
+
+    "minifiers": {
+        "css": {
+            "commentMode": "all"
+        },
+        "javascript": { }
+    }
+}

@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <Copyright>Copyright 2022</Copyright>
+    <Authors>Stanislav Bakhuta</Authors>
+    <Description>Compiles LESS files</Description>
+    <PackageTags>LESS</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/stbear/LessCompiler/master/src/LessCompilerVsix2022/Resources/icon.png</PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/stbear/LessCompiler/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/stbear/LessCompiler</RepositoryUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+</Project>
