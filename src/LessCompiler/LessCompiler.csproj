@@ -2,12 +2,12 @@
   <Import Project="..\common.props" />
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net4.8</TargetFrameworks>
+    <TargetFrameworks>net4.8;netstandard2.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
-    <Title>Web Compiler</Title>
+    <Title>Less Compiler</Title>
     <PackageId>BuildLessCompiler</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <BuildOutputTargetFolder>tools</BuildOutputTargetFolder>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <NoPackageAnalysis>true</NoPackageAnalysis>
@@ -42,11 +42,16 @@
     but before NuGet generates a nuspec. See https://github.com/NuGet/Home/issues/4704.
     -->
     <ItemGroup>
-      <_PackageFiles Include="bin\$(Configuration)\net4.8\Newtonsoft.Json.dll;bin\$(Configuration)\net4.8\NUglify.dll">
-        <PackagePath>tools\net48\%(RecursiveDir)</PackagePath>
+      <_PackageFiles Include="bin\$(Configuration)\netstandard2.0\Newtonsoft.Json.dll;bin\$(Configuration)\netstandard2.0\NUglify.dll">
+        <PackagePath>tools\netstandard2.0\%(RecursiveDir)</PackagePath>
         <Visible>false</Visible>
         <BuildAction>Content</BuildAction>
       </_PackageFiles>
+        <_PackageFiles Include="bin\$(Configuration)\net4.8\Newtonsoft.Json.dll;bin\$(Configuration)\net4.8\NUglify.dll">
+            <PackagePath>tools\net48\%(RecursiveDir)</PackagePath>
+            <Visible>false</Visible>
+            <BuildAction>Content</BuildAction>
+        </_PackageFiles>
     </ItemGroup>
   </Target>
 </Project>

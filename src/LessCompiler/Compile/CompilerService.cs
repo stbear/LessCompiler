@@ -10,7 +10,7 @@ namespace LessCompiler
     /// </summary>
     public static class CompilerService
     {
-        internal const string Version = "0.1.1";
+        internal const string Version = "0.1.2";
         private static readonly string _path = Path.Combine(Path.GetTempPath(), "LessCompiler" + Version);
         private static object _syncRoot = new object(); // Used to lock on the initialize step
 
