@@ -7,7 +7,7 @@
     <Title>Web Compiler</Title>
     <PackageId>BuildLessCompiler</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.1</Version>
+    <Version>0.1.1</Version>
     <BuildOutputTargetFolder>tools</BuildOutputTargetFolder>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <NoPackageAnalysis>true</NoPackageAnalysis>
@@ -42,8 +42,8 @@
     but before NuGet generates a nuspec. See https://github.com/NuGet/Home/issues/4704.
     -->
     <ItemGroup>
-      <_PackageFiles Include="bin\$(Configuration)\*\Newtonsoft.Json.dll;bin\$(Configuration)\*\NUglify.dll">
-        <PackagePath>tools\%(RecursiveDir)</PackagePath>
+      <_PackageFiles Include="bin\$(Configuration)\net4.8\Newtonsoft.Json.dll;bin\$(Configuration)\net4.8\NUglify.dll">
+        <PackagePath>tools\net48\%(RecursiveDir)</PackagePath>
         <Visible>false</Visible>
         <BuildAction>Content</BuildAction>
       </_PackageFiles>

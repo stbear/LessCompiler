@@ -111,9 +111,6 @@
     <Content Include="Resources\logo.png">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Newtonsoft.Json.dll">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
     <Content Include="Resources\Package.ico" />
     <Content Include="Resources\preview.png">
       <IncludeInVSIX>true</IncludeInVSIX>

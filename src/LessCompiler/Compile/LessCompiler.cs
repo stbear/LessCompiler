@@ -94,6 +94,7 @@ namespace LessCompiler
             };
 
             start.EnvironmentVariables["PATH"] = _path + ";" + start.EnvironmentVariables["PATH"];
+            start.EnvironmentVariables["NODE_SKIP_PLATFORM_CHECK"] = "1";
 
             using (Process p = Process.Start(start))
             {
@@ -116,7 +117,7 @@ namespace LessCompiler
                 arguments += $" --math={options.Math}";
 
             //if (options.IECompat)
-                //arguments += " --ie-compat";
+            //arguments += " --ie-compat";
 
             if (options.StrictUnits)
                 arguments += " --strict-units=on";
