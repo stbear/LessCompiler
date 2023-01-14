@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <_LessCompilerTaskAssembly Condition="'$(MSBuildRuntimeType)' == 'Core'">..\tools\netstandard2.0\LessCompiler.dll</_LessCompilerTaskAssembly>
-        <_LessCompilerTaskAssembly Condition="'$(MSBuildRuntimeType)' != 'Core'">..\tools\net48\LessCompiler.exe</_LessCompilerTaskAssembly>
+        <!--<_LessCompilerTaskAssembly Condition="'$(MSBuildRuntimeType)' == 'Core'">..\tools\netstandard2.0\LessCompiler.dll</_LessCompilerTaskAssembly>
+        <_LessCompilerTaskAssembly Condition="'$(MSBuildRuntimeType)' != 'Core'">..\tools\net48\LessCompiler.exe</_LessCompilerTaskAssembly>-->
+        <_LessCompilerTaskAssembly>..\tools\netstandard2.0\LessCompiler.dll</_LessCompilerTaskAssembly>
     </PropertyGroup>
 
     <UsingTask AssemblyFile="$(_LessCompilerTaskAssembly)" TaskName="LessCompiler.CompilerBuildTask"/>

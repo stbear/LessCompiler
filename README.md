@@ -4,9 +4,6 @@ A Visual Studio extension that compiles LESS files.
 
 Forked from Jason Moore, removed extra stuff, kept LESS, updated node & node_modules, added sourceMap options.
 
-See the
-[changelog](https://github.com/stbear/LessCompiler/blob/master/CHANGELOG.md)
-
 ### Features
 
 - Compilation of LESS files

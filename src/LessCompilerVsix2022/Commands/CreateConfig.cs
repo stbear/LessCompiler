@@ -5,8 +5,8 @@ using System.IO;
 using System.Linq;
 using EnvDTE;
 using EnvDTE80;
-using Microsoft.VisualStudio.Shell;
 using LessCompiler;
+using Microsoft.VisualStudio.Shell;
 
 namespace LessCompilerVsix
 {

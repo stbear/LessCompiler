@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
@@ -10,7 +9,7 @@ namespace LessCompiler
     /// </summary>
     public static class CompilerService
     {
-        internal const string Version = "0.1.2";
+        internal const string Version = "0.2.0";
         private static readonly string _path = Path.Combine(Path.GetTempPath(), "LessCompiler" + Version);
         private static object _syncRoot = new object(); // Used to lock on the initialize step
 
@@ -52,12 +51,11 @@ namespace LessCompiler
         public static void Initialize()
         {
             var node_modules = Path.Combine(_path, "node_modules");
-            var node_exe = Path.Combine(_path, "node.exe");
             var log_file = Path.Combine(_path, "log.txt");
 
             lock (_syncRoot)
             {
-                if (!Directory.Exists(node_modules) || !File.Exists(node_exe) || !File.Exists(log_file))
+                if (!Directory.Exists(node_modules) || !File.Exists(log_file))
                 {
                     OnInitializing();
 
@@ -65,23 +63,9 @@ namespace LessCompiler
                         Directory.Delete(_path, true);
 
                     Directory.CreateDirectory(_path);
-                    SaveResourceFile(_path, "LessCompiler.Node.node.7z", "node.7z");
-                    SaveResourceFile(_path, "LessCompiler.Node.node_modules.7z", "node_modules.7z");
-                    SaveResourceFile(_path, "LessCompiler.Node.7z.exe", "7z.exe");
-                    SaveResourceFile(_path, "LessCompiler.Node.7z.dll", "7z.dll");
-                    SaveResourceFile(_path, "LessCompiler.Node.prepare.cmd", "prepare.cmd");
+                    SaveResourceFile(_path, "LessCompiler.Node.node.zip", "node.zip");
 
-                    ProcessStartInfo start = new ProcessStartInfo
-                    {
-                        WorkingDirectory = _path,
-                        CreateNoWindow = true,
-                        WindowStyle = ProcessWindowStyle.Hidden,
-                        FileName = "cmd.exe",
-                        Arguments = "/c prepare.cmd"
-                    };
-
-                    Process p = Process.Start(start);
-                    p.WaitForExit();
+                    System.IO.Compression.ZipFile.ExtractToDirectory(Path.Combine(_path, "node.zip"), _path);
 
                     // If this file is written, then the initialization was successful.
                     File.WriteAllText(log_file, DateTime.Now.ToLongDateString());

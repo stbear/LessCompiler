@@ -7,7 +7,7 @@ using LessCompiler;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("PPR")]
 [assembly: AssemblyProduct("Less Compiler")]
-[assembly: AssemblyCopyright("Copyright ©  2022")]
+[assembly: AssemblyCopyright("Copyright © 2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

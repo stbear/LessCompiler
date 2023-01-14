@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 using EnvDTE;
 using EnvDTE80;
+using LessCompilerVsix.Commands;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
-using LessCompiler;
-using LessCompilerVsix.Commands;
 using IServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 
 namespace LessCompilerVsix
@@ -85,21 +83,21 @@ namespace LessCompilerVsix
         public static Dispatcher _dispatcher;
         public static DTE2 _dte;
 
-        protected override async System.Threading.Tasks.Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
+        protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync();
 
             _dispatcher = Dispatcher.CurrentDispatcher;
-            _dte = GetService(typeof(DTE)) as DTE2;
+            _dte = await GetServiceAsync(typeof(DTE)) as DTE2;
 
             LessCompiler.CompilerService.Initializing += (s, e) => { StatusText("Installing updated versions of the web compilers..."); };
             LessCompiler.CompilerService.Initialized += (s, e) => { StatusText("Done installing the web compilers"); };
 
             // Delay execution until VS is idle.
-            _dispatcher.BeginInvoke(new Action(() =>
+            await _dispatcher.BeginInvoke(new Action(() =>
             {
                 // Then execute in a background thread.
-                System.Threading.ThreadPool.QueueUserWorkItem((o) =>
+                ThreadPool.QueueUserWorkItem((o) =>
                 {
                     try
                     {

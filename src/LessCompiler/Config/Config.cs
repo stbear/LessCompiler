@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Newtonsoft.Json;
 
 namespace LessCompiler
@@ -56,7 +57,8 @@ namespace LessCompiler
         public FileInfo GetAbsoluteInputFile()
         {
             string folder = new FileInfo(FileName).DirectoryName;
-            return new FileInfo(Path.Combine(folder, InputFile.Replace("/", "\\")));
+            return new FileInfo(Path.Combine(folder,
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? InputFile.Replace("/", "\\") : InputFile));
         }
 
         /// <summary>
@@ -65,7 +67,8 @@ namespace LessCompiler
         public FileInfo GetAbsoluteOutputFile()
         {
             string folder = new FileInfo(FileName).DirectoryName;
-            return new FileInfo(Path.Combine(folder, OutputFile.Replace("/", "\\")));
+            return new FileInfo(Path.Combine(folder,
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? OutputFile.Replace("/", "\\") : OutputFile));
         }
 
         /// <summary>
@@ -92,7 +95,7 @@ namespace LessCompiler
 
             if (dependencies != null)
             {
-                string key = input.FullName.ToLowerInvariant();
+                string key = input.FullName;
                 return CheckForNewerDependenciesRecursively(key, dependencies, output);
             }
 

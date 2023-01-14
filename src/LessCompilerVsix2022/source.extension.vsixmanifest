@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="e45cd35c-44e9-46c3-afe6-81d117d2ad2c" Version="0.1" Language="en-US" Publisher="Stanislav Bakhuta" />
+        <Identity Id="e45cd35c-44e9-46c3-afe6-81d117d2ad2c" Version="0.2" Language="en-US" Publisher="Stanislav Bakhuta" />
         <DisplayName>Less Compiler 2022</DisplayName>
         <Description xml:space="preserve">The easiest and most powerful way to compile LESS files directly within Visual Studio or through MSBuild.</Description>
         <MoreInfo>https://github.com/stbear/LessCompiler</MoreInfo>

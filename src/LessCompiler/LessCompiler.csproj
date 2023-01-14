@@ -7,35 +7,31 @@
     <Title>Less Compiler</Title>
     <PackageId>BuildLessCompiler</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.1.2</Version>
+    <Version>0.2.0</Version>
     <BuildOutputTargetFolder>tools</BuildOutputTargetFolder>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <!-- forces SDK to copy dependencies into build output to make packing easier -->
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net4.8|AnyCPU'">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Node\prepare.cmd" />
-    <EmbeddedResource Include="Node\node.7z" />
-    <EmbeddedResource Include="Node\node_modules.7z" />
-    <EmbeddedResource Include="Node\7z.dll" />
-    <EmbeddedResource Include="Node\7z.exe" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Build.Framework" Version="16.11.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.11.0" PrivateAssets="All" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" PrivateAssets="All" />
-    <PackageReference Include="NUglify" Version="1.17.3" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Build.Framework" Version="17.4.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.4.0" PrivateAssets="All" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" PrivateAssets="All" />
+    <PackageReference Include="NUglify" Version="1.20.4" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="MSBuild\*.targets" PackagePath="build\" />
   </ItemGroup>
-  <Target Name="PrepareNpmDependencies" AfterTargets="Restore">
+  <ItemGroup>
+    <None Remove="Node\node.zip" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Node\node.zip" />
+  </ItemGroup>
+  <!--<Target Name="PrepareNpmDependencies" AfterTargets="Restore">
     <Exec Command="..\..\build\build.cmd" />
-  </Target>
+  </Target>-->
   <Target Name="PackTaskDependencies" BeforeTargets="GenerateNuspec">
     <!--
     The include needs to happen after output has been copied to build output folder
@@ -47,11 +43,6 @@
         <Visible>false</Visible>
         <BuildAction>Content</BuildAction>
       </_PackageFiles>
-        <_PackageFiles Include="bin\$(Configuration)\net4.8\Newtonsoft.Json.dll;bin\$(Configuration)\net4.8\NUglify.dll">
-            <PackagePath>tools\net48\%(RecursiveDir)</PackagePath>
-            <Visible>false</Visible>
-            <BuildAction>Content</BuildAction>
-        </_PackageFiles>
     </ItemGroup>
   </Target>
 </Project>

@@ -6,8 +6,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Microsoft.VisualStudio.TaskRunnerExplorer;
 using LessCompiler;
+using Microsoft.VisualStudio.TaskRunnerExplorer;
 
 namespace LessCompilerVsix
 {

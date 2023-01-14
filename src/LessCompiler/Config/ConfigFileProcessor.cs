@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace LessCompiler
@@ -112,12 +113,13 @@ namespace LessCompiler
                 // Compile if the file if it's referenced directly in compilerconfig.json
                 foreach (Config config in configs)
                 {
-                    string input = Path.Combine(folder, config.InputFile.Replace("/", "\\"));
+                    string input = Path.Combine(folder,
+                        RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? config.InputFile.Replace("/", "\\") : config.InputFile);
 
                     if (input.Equals(sourceFile, StringComparison.OrdinalIgnoreCase))
                     {
                         list.Add(ProcessConfig(folder, config));
-                        compiledFiles.Add(input.ToLowerInvariant());
+                        compiledFiles.Add(input);
                     }
                 }
 
@@ -125,14 +127,14 @@ namespace LessCompiler
                 var dependencies = DependencyService.GetDependencies(projectPath, sourceFile);
                 if (dependencies != null)
                 {
-                    string key = sourceFile.ToLowerInvariant();
+                    string key = sourceFile;
 
                     if (dependencies.ContainsKey(key))
                     {
                         //compile all files that have references to the compiled file
                         foreach (var file in dependencies[key].DependentFiles.ToArray())
                         {
-                            if (!compiledFiles.Contains(file.ToLowerInvariant()))
+                            if (!compiledFiles.Contains(file))
                                 list.AddRange(SourceFileChanged(configFile, file, projectPath, compiledFiles));
                         }
                     }
@@ -171,7 +173,8 @@ namespace LessCompiler
 
                 foreach (Config config in configs)
                 {
-                    string input = Path.Combine(folder, config.InputFile.Replace("/", "\\"));
+                    string input = Path.Combine(folder,
+                        RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? config.InputFile.Replace("/", "\\") : config.InputFile);
 
                     if (input.Equals(sourceFile, StringComparison.OrdinalIgnoreCase))
                         list.Add(config);

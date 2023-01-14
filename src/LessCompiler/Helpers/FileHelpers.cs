@@ -13,8 +13,9 @@ namespace LessCompiler
         /// </summary>
         public static string MakeRelative(string baseFile, string file)
         {
-            Uri baseUri = new Uri(baseFile, UriKind.RelativeOrAbsolute);
-            Uri fileUri = new Uri(file, UriKind.RelativeOrAbsolute);
+            // RelativeOrAbsolute makes Linux path always relative
+            Uri baseUri = new Uri(baseFile, UriKind.Absolute);
+            Uri fileUri = new Uri(file, UriKind.Absolute);
 
             return Uri.UnescapeDataString(baseUri.MakeRelativeUri(fileUri).ToString());
         }

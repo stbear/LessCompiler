@@ -54,7 +54,7 @@ namespace LessCompiler
                     files.AddRange(Directory.GetFiles(projectRootPath, pattern, SearchOption.AllDirectories));
                 }
 
-                foreach (var path in (from p in files select p.ToLowerInvariant()))
+                foreach (var path in (from p in files select p))
                 {
                     UpdateFileDependencies(path);
                 }

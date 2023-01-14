@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
 using LessCompiler;
@@ -62,7 +61,7 @@ namespace LessCompilerVsix
             ITextDocument document;
             if (TextDocumentFactoryService.TryGetTextDocument(textView.TextDataModel.DocumentBuffer, out document))
             {
-                string fileName = Path.GetFileName(document.FilePath).ToLowerInvariant();
+                string fileName = Path.GetFileName(document.FilePath);
 
                 // Check if filename is absolute because when debugging, script files are sometimes dynamically created.
                 if (string.IsNullOrEmpty(fileName) || !Path.IsPathRooted(document.FilePath))

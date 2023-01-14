@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
-using System;
 
 namespace LessCompiler
 {
@@ -29,7 +29,7 @@ namespace LessCompiler
             if (this.Dependencies != null)
             {
                 FileInfo info = new FileInfo(path);
-                path = info.FullName.ToLowerInvariant();
+                path = info.FullName;
 
                 if (!Dependencies.ContainsKey(path))
                     Dependencies[path] = new Dependencies();
@@ -39,7 +39,7 @@ namespace LessCompiler
                 //remove the dependentfile registration of this file for all other files
                 foreach (var dependenciesPath in Dependencies.Keys)
                 {
-                    var lowerDependenciesPath = dependenciesPath.ToLowerInvariant();
+                    var lowerDependenciesPath = dependenciesPath;
                     if (Dependencies[lowerDependenciesPath].DependentFiles.Contains(path))
                     {
                         Dependencies[lowerDependenciesPath].DependentFiles.Remove(path);
@@ -67,7 +67,7 @@ namespace LessCompiler
                             theFile = new FileInfo(importedfile.FullName + this.FileExtension);
                         }
 
-                        var dependencyFilePath = theFile.FullName.ToLowerInvariant();
+                        var dependencyFilePath = theFile.FullName;
 
                         if (!File.Exists(dependencyFilePath))
                         {
@@ -79,7 +79,7 @@ namespace LessCompiler
                             if (!File.Exists(cleanPath))
                                 continue;
 
-                            dependencyFilePath = cleanPath.ToLowerInvariant();
+                            dependencyFilePath = cleanPath;
                         }
 
                         if (!Dependencies[path].DependentOn.Contains(dependencyFilePath))

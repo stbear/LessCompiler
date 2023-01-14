@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -78,15 +79,15 @@ namespace LessCompiler
         private void RunCompilerProcess(Config config, FileInfo info)
         {
             string arguments = ConstructArguments(config);
-
+            string slash = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/";
             ProcessStartInfo start = new ProcessStartInfo
             {
                 WorkingDirectory = info.Directory.FullName,
                 UseShellExecute = false,
                 WindowStyle = ProcessWindowStyle.Hidden,
                 CreateNoWindow = true,
-                FileName = "cmd.exe",
-                Arguments = $"/c \"\"{Path.Combine(_path, "node_modules\\.bin\\lessc.cmd")}\" {arguments} \"{info.FullName}\"\"",
+                FileName = "node",
+                Arguments = $"\"{Path.Combine(_path, $"node_modules{slash}less{slash}bin{slash}lessc")}\" {arguments} \"{info.FullName}\"",
                 StandardOutputEncoding = Encoding.UTF8,
                 StandardErrorEncoding = Encoding.UTF8,
                 RedirectStandardOutput = true,
